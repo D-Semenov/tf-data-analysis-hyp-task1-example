@@ -8,6 +8,7 @@ def solution(x_success: int,
              x_cnt: int, 
              y_success: int, 
              y_cnt: int) -> bool:
+    import scipy.stats as sts
     p1 = x_success / x_cnt
     p2 = y_success / y_cnt
     p = (x_success + y_success) / (x_cnt + y_cnt)
@@ -15,7 +16,7 @@ def solution(x_success: int,
     se = (p*(1-p)*(1/x_cnt + 1/y_cnt))**0.5
     z = d / se
     alpha = 0.04
-    z_critical = norm.ppf(1 - alpha/2)
+    z_critical = sts.norm.ppf(1 - alpha/2)
     if abs(z) > z_critical:
         return True # отклоняем нулевую гипотезу
     else:
